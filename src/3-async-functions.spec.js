@@ -25,18 +25,25 @@ describe("Assignment 3 - async", function() {
   })
 
   it("giveItBackLater should use callback, but not straight away", function(done) {
-    let callbackCalled = false
+    let functionSetupDone = false
     const { giveItBackLater } = require("./async-functions")
     giveItBackLater("TotallyAwesomeValue", value => {
-      callbackCalled = true
-      assert.strictEqual(
-        value,
-        "TotallyAwesomeValue",
-        "Callback should receive the value passed to `giveItBackLater`"
-      )
-      done()
+      if (!functionSetupDone) {
+        done("Callback should not be called straight away")
+      } else {
+        try {
+          assert.strictEqual(
+            value,
+            "TotallyAwesomeValue",
+            "Callback should receive the value passed to `giveItBackLater`"
+          )
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
     })
-    assert(!callbackCalled, "Callback should not be called straight away")
+    functionSetupDone = true
   })
 
   it("promiseToGiveItBackLater should return the given value", function(done) {

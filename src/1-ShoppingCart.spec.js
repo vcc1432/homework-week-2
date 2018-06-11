@@ -17,7 +17,7 @@ describe("Assignment 1 - ShoppingCart", function() {
     )
     cart.addItem("Trash can", 1, 15.5)
     assert.deepStrictEqual(
-      cart.items,
+      cart.getItems(),
       [
         {
           name: "Trash can",
