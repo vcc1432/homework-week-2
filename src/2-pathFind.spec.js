@@ -26,13 +26,18 @@ describe("Assignment 2 - pathFind", function() {
     const obj = {
       foo1: {
         foo2: {
-          bar: "Some value"
-        }
-      }
+          foo2: {
+            bar: "Some value"
+          }
+        },
+        foo1: "Hey",
+        bar: 123
+      },
+      bar: "Another value"
     }
     const { pathFind } = require("./pathFind")
     assert.strictEqual(
-      pathFind(["foo1", "foo2", "bar"], obj),
+      pathFind(["foo1", "foo2", "foo2", "bar"], obj),
       "Some value",
       "should return the foo1.foo2.bar property"
     )
@@ -40,11 +45,13 @@ describe("Assignment 2 - pathFind", function() {
 
   it("should be a pure function", function() {
     const { pathFind } = require("./pathFind")
-    const path = ["foo1", "foo2", "bar"]
+    const path = ["foo1", "foo2", "foo2", "bar"]
     const obj = {
       foo1: {
         foo2: {
-          bar: "Some value"
+          foo2: {
+            bar: "Some value"
+          }
         },
         foo1: "Hey",
         bar: 123
@@ -54,7 +61,7 @@ describe("Assignment 2 - pathFind", function() {
     pathFind(path, obj)
     assert.deepStrictEqual(
       path,
-      ["foo1", "foo2", "bar"],
+      ["foo1", "foo2", "foo2", "bar"],
       "path should not be modified"
     )
     assert.deepStrictEqual(
@@ -62,7 +69,9 @@ describe("Assignment 2 - pathFind", function() {
       {
         foo1: {
           foo2: {
-            bar: "Some value"
+            foo2: {
+              bar: "Some value"
+            }
           },
           foo1: "Hey",
           bar: 123
