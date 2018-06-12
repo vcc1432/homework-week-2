@@ -55,7 +55,7 @@ describe("Assignment 1 - ShoppingCart", function() {
     assert.notDeepStrictEqual(
       cart1.getItems(),
       cart2.getItems(),
-      "Items array should NOT be equal after adding more items to second cart"
+      "Items array should NOT be equal after adding more items to second cart. You need to copy the items array."
     )
     assert.deepStrictEqual(
       cart1.getItems(),
@@ -87,6 +87,6 @@ describe("Assignment 1 - ShoppingCart", function() {
     // increment quantity of first item in cart2
     cart2.getItems()[0].quantity++
     assert.strictEqual(cart2.getItems()[0].quantity, 3, "quantity should be changeable")
-    assert.strictEqual(cart1.getItems()[0].quantity, 2, "cart items should be copied, quantities should change independently")
+    assert.strictEqual(cart1.getItems()[0].quantity, 2, "Not only the items array should be copied, but also the items themselves. There are many ways to copy objects; don't make it harder than it needs to be.")
   })
 })

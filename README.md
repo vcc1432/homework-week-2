@@ -26,6 +26,7 @@ The app should be runnable simply by cloning the repository and running `yarn te
 
 1.  You must create a module named `ShoppingCart`. The test imports it with
     ```js
+    // your module's default export should be a class/constructor
     const ShoppingCart = require("./ShoppingCart")
     ```
 1.  The module must export a `class`, so we can run `const cart = new ShoppingCart()`
@@ -49,17 +50,19 @@ The app should be runnable simply by cloning the repository and running `yarn te
     ```
     _Note: This is a named export_
 1.  The exported `pathFind` should be a function. Declare this function with the `function` keyword (otherwise the tests cannot check if your function is recursive later)
-1.  The function will be called with two parameters: `pathFind(path, object)`. The path is an array of strings and the object is an object. The array of strings refer to a sequence of properties on the object. Here are some examples of how it should work:
+1.  The function will be called with two parameters: `pathFind(path, object)`. The path is an array of strings and the object is an object. The array of strings refer to a sequence of properties on the object and its nested objects. Here are some examples of how it should work:
     ```js
     pathFind(["foo"], { foo: "bar" }) // === "bar"
     pathFind(["name"], { name: "Dave" }) // === "Dave"
-    pathFind(["author", "name"], { author: { name: "Stephen" } }) // === "Stephen"
+    pathFind(["author", "name"], { year: 1988, author: { name: "Stephen" } }) // === "Stephen"
     pathFind(["book", "author", "name"], {
       book: {
         author: {
           name: "Yuval"
-        }
-      }
+        },
+        year: 2015
+      },
+      category: "Science"
     }) // === "Yuval"
     ```
 1.  The function should be a pure function, neither of the inputs should be mutated.
@@ -81,8 +84,8 @@ The app should be runnable simply by cloning the repository and running `yarn te
    giveItBackLater(value, callback)
    ```
    The `callback` function should be called and given the `value` as a parameter. It should NOT do this right away, but later (asynchronously) using `setTimeout`.
-1. The function `promiseToGiveItBackLater(value)` should return a promise that will resolve with the `value` later. It should use the same function you defined in `giveItBackLater`. That means you will wrap your callback-style function with a promise-style version.
-1. When the code `const outputPromise = addSomePromises(somePromise)` is executed, your function should return a new promise that has both a fulfillment handler and a rejection handler.
+1. The function `promiseToGiveItBackLater(value)` should return a promise that will resolve with the `value` later. Similar to the `giveItBackLater` function. In fact, it should use `giveItBackLater`. Meaning, you will wrap your callback-style function `giveItBackLater` with a promise-style version.
+1. When the code `const outputPromise = addSomePromises(somePromise)` is executed, your function should return a promise that has both a fulfillment handler and a rejection handler. You can achieve this through chaining.
 
      - When `somePromise` resolves with a string `"foo"`, the `outputPromise` should resolve with a string `"foofoo"`.
      - When `somePromise` is rejected with the value `"bar"`, the `outputPromise`  should resolve with `"barbarbar"`.
