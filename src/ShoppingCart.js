@@ -19,15 +19,9 @@ module.exports = class ShoppingCart {
     clear() {
         this.items = []
     }
+
+    clone() {
+       const copy = {...new ShoppingCart()}
+       return copy
+    }
 }
-
-
-// const cart = new ShoppingCart()
-// cart.addItem("Trash can", 1, 15.5)
-// cart.addItem("Duvet cover", 1, 25)
-// console.log('this is the existing array: ', cart.getItems())
-// cart.clear()
-// console.log('this is the existing array: ', cart.getItems())
-// cart.addItem("Pyamas", 2, 7)
-// console.log('this is the existing array: ', cart.getItems())
-
