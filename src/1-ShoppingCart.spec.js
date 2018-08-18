@@ -1,5 +1,6 @@
 const assert = require("assert")
 
+
 describe("Assignment 1 - ShoppingCart", function() {
 
   it("JS file should exist, and exported value should be a constructor", function() {
