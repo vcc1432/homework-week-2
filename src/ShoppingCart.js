@@ -4,28 +4,30 @@ module.exports = class ShoppingCart {
     }
 
     getItems() {
-       return this.items
+       return this.items // when called, returns the array
     }
     
-   addItem(itemName, quantity, price) { 
+   addItem(itemName, quantity, price) { //adds new item to internal array
        const newItem = {     
             name: itemName,
             quantity: quantity,
             pricePerUnit: price
        }
-       console.log(newItem)
-       this.items.push(newItem)
+       this.items.push(newItem) //this object is pushed into empty array.
     } 
     
-    //adds new item to internal array
-    //item should be an object with 3 properties: name, quantity, pricePerUnit 
-    //this object should be pushed into getItems array.
     clear() {
+        this.items = []
     }
 }
 
 
 // const cart = new ShoppingCart()
-// //console.log(cart.getItems())
 // cart.addItem("Trash can", 1, 15.5)
+// cart.addItem("Duvet cover", 1, 25)
+// console.log('this is the existing array: ', cart.getItems())
+// cart.clear()
+// console.log('this is the existing array: ', cart.getItems())
+// cart.addItem("Pyamas", 2, 7)
+// console.log('this is the existing array: ', cart.getItems())
 
