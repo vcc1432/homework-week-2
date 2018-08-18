@@ -21,7 +21,8 @@ module.exports = class ShoppingCart {
     }
 
     clone() {
-       const copy = {...new ShoppingCart()}
-       return copy
+       return {...new ShoppingCart()}
+       
     }
 }
+

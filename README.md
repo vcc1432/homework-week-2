@@ -73,7 +73,8 @@ The app should be runnable simply by cloning the repository and running `yarn te
       promiseToGiveItBackLater
     } = require("./async-functions")
     ```
-    _Note: There should be **3** named exports that should all be functions_
+    _Note: T
+    here should be **3** named exports that should all be functions_
 1. The function `giveItBackLater` will be called with two parameters:
    ```js
    giveItBackLater(value, callback)

@@ -1,43 +1,44 @@
 
 function giveItBackLater(value, callback) {
-    const loadComplete = ()=> {
-        console.log(value)
-        callback()
+    function loadComplete() {
+       callback(()=> {console.log(value)})
     }
     setTimeout(loadComplete, 1000)
 }
 
-giveItBackLater("hi", setTimeout)
-
-
-
 
 function addSomePromises(value) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         giveItBackLater(value, resolve)
       })  
 }
 
-console.log(addSomePromises("hello")
-  .then(value => getAuthorWrappedPromise(value)))
+console.log(addSomePromises("hello"))
+ 
 
 
 function promiseToGiveItBackLater(somePromise) {
-    return new Promise((resolve, reject) => {
-        console.log(somePromise)
-        
-        const error = false
-
-        if(!error) {
-            resolve(somePromise.concat('', somePromise))
-        } else {
-            reject(somePromise.concat('',somePromise,somePromise))
+    return new Promise(
+        function (resolve, reject) {
+            if (somePromise) {
+                console.log(somePromise.concat('',somePromise))
+                resolve(somePromise); 
+            } else {
+                reject(console.log(somePromise.concat('',somePromise, somePromise))); 
+            }
+    
         }
-    })
+    );
 }
 
-//console.log(promiseToGiveItBackLater("hello"))
 
+
+// 1. Calling `addSomePromises(somePromise)` should chain some promises and return a new one. Your code should add both a fulfillment handler and a rejection handler.
+
+//      - When `somePromise` resolves with a string `"foo"`, the returned promise should resolve with a string `"foofoo"`.
+//      - When `somePromise` is rejected with the value `"bar"`, the returned promise should resolve with `"barbarbar"`.
+
+//    So, your fulfillment handler should double the string and the rejection handler should triple the string.
 
 
 module.exports = { giveItBackLater, addSomePromises, promiseToGiveItBackLater }
