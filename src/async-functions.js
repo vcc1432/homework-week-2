@@ -1,11 +1,10 @@
 
 function giveItBackLater(value, callback) {
     function loadComplete() {
-       callback(()=> {console.log(value)})
+       callback(() => {console.log(value)})
     }
     setTimeout(loadComplete, 1000)
 }
-
 
 function addSomePromises(value) {
     return new Promise(resolve => {
@@ -13,20 +12,14 @@ function addSomePromises(value) {
       })  
 }
 
-console.log(addSomePromises("hello"))
- 
-
-
 function promiseToGiveItBackLater(somePromise) {
-    return new Promise(
-        function (resolve, reject) {
+    return new Promise((resolve, reject) => {
             if (somePromise) {
                 console.log(somePromise.concat('',somePromise))
                 resolve(somePromise); 
             } else {
                 reject(console.log(somePromise.concat('',somePromise, somePromise))); 
             }
-    
         }
     );
 }
